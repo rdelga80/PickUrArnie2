@@ -9,7 +9,6 @@
       </div>
     </div> <!-- row -->  
   </div> <!-- container -->
-  {{ musicSrc }}
 </template>
 
 <script>
