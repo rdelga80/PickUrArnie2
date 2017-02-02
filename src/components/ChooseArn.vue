@@ -6,52 +6,53 @@
 		<div class="col-xs-12 quest-contain">
 		
 			<div v-for="(q, key, index) in questions">
-				<transition :name="transName" mode="out-in" appear>
+				<transition name="changeq" mode="out-in" appear>
 					<div class="question col-xs-12" v-if="question == index">
 						<div>
 							Question {{ question + 1 }}
 							<hr>
+
+
 							<div class="quest-text">{{ q.questText }}</div>
 						</div>
 						<div class="row">
 
-							<div class="col-xs-6 answer-outer" v-for="(answers, index) in q.answersText">
-								<div class="answer-tile" @click="selectAns(answers.Movie)" :class="{ selectedAns: answers.isSel }" key="answers.Movie">
-									{{ answers.Answer }} - {{ answers.isSel }} - {{ answers.Movie }} - {{ index }}
+							<!-- <div class="col-xs-6 answer-outer" v-for="(answers, index) in q.answersText">
+								<div class="answer-tile" @click="selectAns(index)" :class="{ selectedAns1: answers.isSel }" key="answers.isSel">
+									{{ answers.Answer }} - {{ answers.isSel }} - {{ answers.Movie }} - {{ index }} - {{ question0 }} - {{ question1 }}
 								</div>
 
 							</div>
 
 							<div key="text">{{ text }}</div>
-							<input v-model="text" style="color: black">
+							<input v-model="text" style="color: black"> -->
 
-
-							<!-- <div class="col-xs-6 answer-outer">
-								<div class="answer-tile" @click="selectAns(0)" :class="{ selectedAns1: question0 }">
+							<div class="col-xs-6 answer-outer">
+								<div class="answer-tile" @click="[selectAns(0),selAns = q.answersText[0].Movie]" :class="{ selectedAns1: question0 }">
 									{{ q.answersText[0].Answer }}
 								</div>
 							</div>
 							<div class="col-xs-6 answer-outer">
-								<div class="answer-tile" @click="selectAns(1)" :class="{ selectedAns2: question1 }">
+								<div class="answer-tile" @click="[selectAns(1),selAns = q.answersText[1].Movie]" :class="{ selectedAns2: question1 }">
 									{{ q.answersText[1].Answer }}
 								</div>
 							</div>
 							<div class="col-xs-6 answer-outer">
-								<div class="answer-tile" @click="selectAns(2)" :class="{ selectedAns3: question2 }">
+								<div class="answer-tile" @click="[selectAns(2),selAns = q.answersText[2].Movie]" :class="{ selectedAns3: question2 }">
 									{{ q.answersText[2].Answer }}
 								</div>
 							</div>
 							<div class="col-xs-6 answer-outer">
-								<div class="answer-tile" @click="selectAns(3)" :class="{ selectedAns4: question3 }">
-									{{ q.answersText[3].Answer }}
+								<div class="answer-tile" @click="[selectAns(3),selAns = q.answersText[3].Movie]" :class="{ selectedAns4: question3 }">
+									{{ q.answersText[3].Answer }} - {{ q.answersText[3].Movie }}
 								</div>
-							</div> -->
+							</div>
 						</div> <!-- row -->
 						<div class="row">
 							<div class="col-xs-3 col-xs-offset-4" @click="question--">
 								Back
 							</div>
-							<div class="col-xs-3" @click="[question++, addAnswer]">
+							<div class="col-xs-3" @click="[question++, addAnswer(selAns),question0 = false, question1 = false, question2 = false, question3 = false]">
 								Next
 							</div>
 						</div>
@@ -69,7 +70,7 @@
 	export default {
 		data() {
 			return {
-				text: '',
+				selAns: '',
 				question0: false,
 				question1: false,
 				question2: false,
@@ -83,7 +84,7 @@
 					question1: {
 						questText: 'If you find yourself face to face with your biggest enemy, what would be the first thing you say to them?',
 						answersText: [
-							{ Answer: 'Even though you\'re me, I hate you!', Movie: 'C', isSel: false },
+							{ Answer: 'Even though you\'re me, I hate you!', Movie: 'C', isSel: false },	
 							{ Answer: 'You may have killed my family, but at least I got to push a wheel around and get some serious muscles.', Movie: 'D', isSel: false },
 							{ Answer: 'Give me back my son\'s favorite toy.', Movie: 'G', isSel: false },
 							{ Answer: 'Am I really fighting a bear in Central Park?', Movie: 'I', isSel: false}
@@ -174,15 +175,15 @@
 	}
 
 	.changeq-leave {
-
+		transform: translateY(0px);	
 	}
 
 	.changeq-leave-active {
-
+		transition: transform 5s;
 	}
 
 	.changeq-leave-to {
-
+		transform: translateY(-600px);
 	}
 
 	.question {
