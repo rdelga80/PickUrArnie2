@@ -87,6 +87,7 @@ export default {
     },
     chooseArnie() {
       this.showPick = false;
+      pauseSound();
       this.$emit('startChoice', 'chooseArnie');
     },
     chooseAll() {

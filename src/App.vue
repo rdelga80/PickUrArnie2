@@ -39,11 +39,11 @@ export default {
   }
 
   .exit-enter {
-    /*top: 0;*/
+    opacity: 0;
   }
 
   .exit-enter-active {
-    /*transition: 'margin-top' 7s;*/
+    transition: opacity 5s;
   }
 
 </style>
