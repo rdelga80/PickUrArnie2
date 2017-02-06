@@ -61,6 +61,15 @@
 				</transition-group>
 			</div>
 		</div>
+		<transition name="droppingAns">	
+			<div class="col-xs-12" id="yourArnie" v-if="yourArnie != '' ">
+				<app-answers
+					:answer="yourArnie"
+					>
+
+				</app-answers>
+			</div>
+		</transition>
 	</div>	
 </template>
 
@@ -76,11 +85,14 @@
 				question1: false,
 				question2: false,
 				question3: false,
-				question: 0,
+				// question: 0,
+				question: 9,
 				arnQuest: 'app-quest-one',
-				answers: [],
+				// answers: [],
+				answers: ["A","A","A","A","A","A","A","A","A"],
 				bgColor: false,
 				transName: 'changeq',
+				yourArnie: '',
 				questions: {
 					question1: {
 						questText: 'If you find yourself face to face with your biggest enemy, what would be the first thing you say to them?',
@@ -240,7 +252,7 @@
 				var g = 0;
 				var h = 0;
 				for(var i = 0; i < ans; i++) {
-					var sel = this.ansswers.length[i];
+					var sel = this.answers[i];
 					switch(sel) {
 						case 'A':
 							a++;
@@ -268,7 +280,11 @@
 							break;
 					}
 				}
-				
+				var ansMatrix = [{'A': a},{'B': b},{'C': c},{'D': d},{'E': e},{'F': f},{'G': g},{'H': h}];
+				var sortMatrix = ansMatrix.sort();
+				for (var arnKey in sortMatrix[0]) {
+					this.yourArnie = arnKey
+				}
 			}
 		},
 		components: {
@@ -282,6 +298,14 @@
 
 	div {
 		color: white;
+	}
+
+	.droppingAns-enter {
+		opacity: 0;
+	}
+
+	.droppingAns-enter-active {
+		transition: 5s;
 	}
 
 	.quest-contain {

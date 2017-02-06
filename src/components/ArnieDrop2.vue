@@ -1,20 +1,20 @@
 <template>
 	<div id="arnie-row" class="row">
-  		<div class="col-xs-12" :style="dropping">
-  			<div class="row">
-  			  <div id="whos" class="col-xs-12">
-  			    <img src="../assets/whos.png" class="img-responsive center-block" :style="{ opacity: opacity }">
-  			  </div>
-  				<div class="col-xs-12">
-  			    <div id="arnie">
-  			      <img id="arnie-fr" class="img-responsive center-block" src="../assets/arnie-fr-1300.png">
-  			    </div>
-  				</div>
-  			  <div id="fav" class="col-xs-12">
-  			    <img src="../assets/fav.png" class="img-responsive center-block" :style="{ opacity: opacity }">
-  			  </div>
-  			</div>
-  		</div>
+		<div class="col-xs-12" :style="dropping">
+			<div class="row">
+			  <div id="whos" class="col-xs-12">
+			    <img src="../assets/whos.png" class="img-responsive center-block" :style="{ opacity: opacity }">
+			  </div>
+				<div class="col-xs-12">
+			    <div id="arnie">
+			      <img id="arnie-fr" class="img-responsive center-block" src="../assets/arnie-fr-1300.png">
+			    </div>
+				</div>
+			  <div id="fav" class="col-xs-12">
+			    <img src="../assets/fav.png" class="img-responsive center-block" :style="{ opacity: opacity }">
+			  </div>
+			</div>
+		</div>
 
 		<div id="frontPick" class="col-xs-8 col-xs-offset-2" :style="{ opacity: opacity }" v-if="showPick">
 			<div class="row">
@@ -39,76 +39,75 @@
 
 export default {
 	data: function() {
-	    return {
-	      dropping: {
-	        marginTop: '-34%'
-	      },
-	      opacity: 0,
-	      arrowShow: true,
-	      isActive: '',
-	      hideArrow: 'none',
-        arrVis: 'visible',
-        showPick: true
-	    }
-	  },
+    return {
+      dropping: {
+        marginTop: '-34%'
+      },
+      opacity: 0,
+      arrowShow: true,
+      isActive: '',
+      hideArrow: 'none',
+      arrVis: 'visible',
+      showPick: true
+    }
+  },
 	methods: {
     dropArnie() {
-      var vm = this;
-      var top = -34;
-      var dropArn = setInterval(function(){
+      var vm = this
+      var top = -34
+      var dropArn = setInterval(function () {
         if(top < 3) {
-          top += 1;
-          vm.dropping.marginTop = top + '%';
+          top += 1
+          vm.dropping.marginTop = top + '%'
         } else {
-          vm.whosOpac();
-          clearInterval(dropArn);
+          vm.whosOpac()
+          clearInterval(dropArn)
         }
       }, 125)
     },
     whosOpac() {
-      var vm = this;
-      var opac = 0;
-      var opacInt = setInterval(function (){
+      var vm = this
+      var opac = 0
+      var opacInt = setInterval(function () {
         if(opac < 1) {
-          opac += 0.1;
-          vm.opacity = opac;
+          opac += 0.1
+          vm.opacity = opac
           } else {
-            clearInterval(opacInt);
-            vm.flashArrow();
+            clearInterval(opacInt)
+            vm.flashArrow()
           }
-
-        }, 200);
+        }, 200)
     },
     flashArrow() {
-    	var vm = this;
+    	var vm = this
     	var flashArr = setInterval(function () {
-    		vm.arrVis == 'hidden' ? vm.arrVis = 'visible' : vm.arrVis = 'hidden';
+    		vm.arrVis == 'hidden' ? vm.arrVis = 'visible' : vm.arrVis = 'hidden'
     	}, 1000)
     },
     chooseArnie() {
-      this.showPick = false;
-      pauseSound();
-      this.$emit('startChoice', 'chooseArnie');
+      this.showPick = false
+      pauseSound()
+      this.$emit('startChoice', 'chooseArnie')
     },
     chooseAll() {
     	this.$emit('startChoice', 'chooseAll')
-      pauseSound();
+      pauseSound()
     }
   },
   beforeMount() {
-    this.dropArnie();
-    playSound();
+    this.dropArnie()
+    playSound()
   }
 }
 
-var sound = new Audio('../../src/assets/start.mp3');
+var sound = new Audio('../../src/assets/start.mp3')
 
 function playSound() {
-    sound.play();
+  sound.play()
 }
 
 function pauseSound() {
-    sound.pause();
+  sound.pause()
 }
 
 </script>
@@ -121,7 +120,7 @@ function pauseSound() {
     height: 365px;
     margin: 0 auto;
     margin-top: -5%;
-	z-index: 9999;
+    z-index: 9999;
   }
 
   #arnie-fr {

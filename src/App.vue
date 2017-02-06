@@ -1,14 +1,11 @@
-<template>
-  <div class="container">
-    <div class="row">
-      <div id="app" class="col-xs-12">
-        <transition name="exit">
+<template lang="pug">
+  div.container
+    div.row
+      div#app.col-xs-12
+        transition(name='exit')
           <!-- switch between components based on click within component -->
-          <component :is="currentComp" @startChoice="currentComp = $event" @endSound="endSound = $event"></component>
-        </transition>
-      </div>
-    </div> <!-- row -->  
-  </div> <!-- container -->
+          component(:is='currentComp' @startChoice='currentComp = $event' @endSound='endSound = $event')
+
 </template>
 
 <script>
