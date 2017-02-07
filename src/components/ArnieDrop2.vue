@@ -1,38 +1,49 @@
-<template>
-	<div id="arnie-row" class="row">
-		<div class="col-xs-12" :style="dropping">
-			<div class="row">
-			  <div id="whos" class="col-xs-12">
-			    <img src="../assets/whos.png" class="img-responsive center-block" :style="{ opacity: opacity }">
-			  </div>
-				<div class="col-xs-12">
-			    <div id="arnie">
-			      <img id="arnie-fr" class="img-responsive center-block" src="../assets/arnie-fr-1300.png">
-			    </div>
-				</div>
-			  <div id="fav" class="col-xs-12">
-			    <img src="../assets/fav.png" class="img-responsive center-block" :style="{ opacity: opacity }">
-			  </div>
-			</div>
-		</div>
-
-		<div id="frontPick" class="col-xs-8 col-xs-offset-2" :style="{ opacity: opacity }" v-if="showPick">
-			<div class="row">
-			  <div class="col-xs-1 col-xs-offset-2">
-					<img src="../assets/arrow.png" v-if="arrowShow" :style="{ visibility: arrVis }">
-			  </div>
-			  <div class="col-xs-9 picktext" style="cursor: pointer" :class="{ pickact: isActive }" v-on:mouseover="[isActive = true, arrowShow = true]" @click="chooseArnie">
-          <p>Choose Ur Arnie</p>
-        </div>
-			  <div class="col-xs-1 col-xs-offset-2">
-					<img src="../assets/arrow.png" v-if="!arrowShow" :style="{ visibility: arrVis }">
-			  </div>
-			  <div class="col-xs-9 picktext" style="cursor: pointer" :class="{ pickact: !isActive }" v-on:mouseover="[isActive = false, arrowShow = false]" @click="chooseAll">
-          <p>Everyones Else's Fav Arnie</p>
-        </div>
-			</div>
-		</div>
-	</div>
+<template lang="pug">
+  div#arnie-row.row
+    div.col-xs-12(:style='dropping')
+      div.row
+        div#whos.col-xs-12
+          img.img-responsive.center-block(
+            src='../assets/whos.png'
+            v-bind:style='{ opacity: opacity }'
+          )
+        div.col-xs-12
+          div#arnie
+            img(src='../assets/arnie-fr-1300.png')#arnie-fr.img-responsive.center-block
+          div#fav.col-xs-12
+            img.img-responsive.center-block(
+              src='../assets/fav.png'
+              v-bind:style='{ opacity: opacity }'
+              )
+    div(:style='{ opacity: opacity }' v-if='showPick')#frontPick.col-xs-8.col-xs-offset-2
+      div.row
+        div.col-xs-1.col-xs-offset-2
+          img(
+            src='../assets/arrow.png'
+            v-if='arrowShow'
+            v-bind:style='{ visibility: arrVis }'
+          )
+        div.col-xs-9.picktext(
+          style='cursor: pointer'
+          v-bind:class='{ pickact: isActive }'
+          @mouseover='[isActive = true, arrowShow = true]'
+          @click='chooseArnie'
+        )
+          p Choose Ur Arnie
+        div.col-xs-1.col-xs-offset-2
+          img(
+            src='../assets/arrow.png'
+            v-if='!arrowShow'
+            v-bind:style='{ visibility: arrVis }'
+          )
+        div.col-xs-9.picktext(
+          style='cursor: pointer'
+          v-bind:class='{ pickact: !isActive }'
+          @mouseover='[isActive = false, arrowShow = false]'
+          @click="chooseAll"
+        )
+          p Everyones Else's Fav Arnie
+        
 </template>
 
 <script>

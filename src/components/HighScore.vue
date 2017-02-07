@@ -1,19 +1,24 @@
-<template>
-	<div class="col-xs-4 col-xs-offset-4" id="arn-initial">
-		<div class="row">
-			<div class="col-xs-4 text-center center-block" id="initials">
-				<div tabindex="0" @keyup.up="let1++" @keyup.down="let1--" class="letters">{{ letter1[let1] }}</div>
-				<div tabindex="1" @keyup.up="let2++" @keyup.down="let2--" class="letters">{{ letter2[let2] }}</div>
-				<div tabindex="2" @keyup.up="let3++" @keyup.down="let3--" class="letters">{{ letter3[let3] }}</div>
-			</div>
-			<div class="col-xs-4">
-				
-			</div>
-			<div class="col-xs-4">
-				
-			</div>
-		</div>
-	</div>
+<template lang="pug">
+	div.text-center.center-block#initials
+		div.letters.center-block.text-center(
+			tabindex='0'
+			@keyup.up='let1++'
+			@keyup.down='let1--'
+		)
+			| {{ letter1[let1] }}
+		div.letters(
+			tabindex='1'
+			@keyup.up='let2++'
+			@keyup.down='let2--'
+		)
+			| {{ letter2[let2] }}
+		div.letters(
+			tabindex='2'
+			@keyup.up='let3++'
+			@keyup.down='let3--'
+		)
+			| {{ letter3[let3] }}
+
 </template>
 
 <script>
@@ -41,7 +46,6 @@
 		margin: 0 15px;
 		line-height: 1em;
 		border-bottom: 1px solid white;
-		width: 1em;
 	}
 
 	#initials {

@@ -1,18 +1,18 @@
-<template>
-	<div class="col-xs-8 col-xs-offset-2 text-center all-arnie">
-		<div class="topAns">
-			Your Arnie Is
-		</div>
-		<div class="arnWho">
-			{{ arnieGrp.arnieType }}
-		</div>
-		<div class="arnImg">
-			<img :src="arnieGrp.arnieImg">
-		</div>
-	</div>
+<template lang="pug">
+	div.col-xs-8.col-xs-offset-2.text-center.all-arnie
+		app-initial
+		div.topAns
+			| Your Arnie Is
+		div.arnWho
+			| {{ arnieGrp.arnieType }}
+		div.arnImg
+			img(v-bind:src='arnieGrp.arnieImg')
+
 </template>
 
 <script>
+
+	import initial from '../HighScore.vue'
 
 	export default{
 		props:['answer'],
@@ -76,6 +76,9 @@
 						break
 				}
 			}
+		},
+		components: {
+			appInitial: initial
 		},
 		created() {
 			var answer = this.arnieAns
