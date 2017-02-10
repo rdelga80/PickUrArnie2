@@ -1,7 +1,9 @@
 <template lang="pug">
 	div.col-xs-8.col-xs-offset-2.text-center.all-arnie
 		app-initial
-		div.topAns
+		div.topAns(
+			ref='topAnswer'
+		)
 			| Your Arnie Is
 		div.arnWho
 			| {{ arnieGrp.arnieType }}
@@ -12,6 +14,7 @@
 
 <script>
 
+	import { eventBus } from '../../main.js'
 	import initial from '../HighScore.vue'
 
 	export default{
@@ -23,7 +26,8 @@
 					arnieType: '',
 					arnieImg: '',
 					arnieSum: ''
-				}
+				},
+				changeBack: 'black'
 			}
 		},
 		methods: {
@@ -81,6 +85,8 @@
 			appInitial: initial
 		},
 		created() {
+			var change = this.changeBack;
+			eventBus.changeBg(change);
 			var answer = this.arnieAns
 			this.chooseArn(answer)
 		}

@@ -1,76 +1,71 @@
-<template>
-	<div class="row">
-		<!-- <transition name="changeq" mode="out-in" appear>
-			<component :is="arnQuest" :question="question" id="drop" @answer="[addAnswer($event), question++]" @nextQuest="arnQuest = $event"></component>
-		</transition>-->
-		<div class="col-xs-12 quest-contain">
-		
-			<div v-for="(q, key, index) in questions">
-				<transition-group name="changeq" mode="out-in" appear>
-					<div class="question col-xs-12" v-if="question == index" key="key">
-						<div>
-							Question {{ question + 1 }}
-							<hr>
+<template lang="pug">
+	div.row
+		div.col-xs-12.quest-contain
+	
+			div(v-for='(q, key, index) in questions')
 
+				transition-group(
+					v-bind:name='transChg'
+					mode='out-in'
+					tag='p'
+				)
+					
+					div.question.col-xs-12(v-if='question == index' v-bind:key='q')
+						div
+							| Question {{ question + 1 }}
+							| {{ transChg }}
+							hr
 
-							<div class="quest-text">{{ q.questText }}</div>
-						</div>
-						<div class="row text-center">
+							div.quest-text
+								| {{ q.questText }}
+						
+						div.row.text-center
+							div.col-xs-6.answer-outer
+								div.answer-tile(
+									@click='[selectAns(0),selAns = q.answersText[0].Movie]'
+									v-bind:class='{ selectedAns1: question0 }'
+								)
+									| {{ q.answersText[0].Answer }}
+								
+							div.col-xs-6.answer-outer
+								div.answer-tile(
+									@click='[selectAns(1),selAns = q.answersText[1].Movie]'
+									v-bind:class='{ selectedAns2: question1 }'
+								)
+									| {{ q.answersText[1].Answer }}
 
-							<!-- <div class="col-xs-6 answer-outer" v-for="(answers, index) in q.answersText">
-								<div class="answer-tile" @click="selectAns(index)" :class="{ selectedAns1: answers.isSel }" key="answers.isSel">
-									{{ answers.Answer }} - {{ answers.isSel }} - {{ answers.Movie }} - {{ index }} - {{ question0 }} - {{ question1 }}
-								</div>
-
-							</div>
-
-							<div key="text">{{ text }}</div>
-							<input v-model="text" style="color: black"> -->
-
-							<div class="col-xs-6 answer-outer">
-								<div class="answer-tile" @click="[selectAns(0),selAns = q.answersText[0].Movie]" :class="{ selectedAns1: question0 }">
-									{{ q.answersText[0].Answer }}
-								</div>
-							</div>
-							<div class="col-xs-6 answer-outer">
-								<div class="answer-tile" @click="[selectAns(1),selAns = q.answersText[1].Movie]" :class="{ selectedAns2: question1 }">
-									{{ q.answersText[1].Answer }}
-								</div>
-							</div>
-							<div class="col-xs-6 answer-outer">
-								<div class="answer-tile" @click="[selectAns(2),selAns = q.answersText[2].Movie]" :class="{ selectedAns3: question2 }">
-									{{ q.answersText[2].Answer }}
-								</div>
-							</div>
-							<div class="col-xs-6 answer-outer">
-								<div class="answer-tile" @click="[selectAns(3),selAns = q.answersText[3].Movie]" :class="{ selectedAns4: question3 }">
-									{{ q.answersText[3].Answer }}
-								</div>
-							</div>
-						</div> <!-- row -->
-						{{ answers }}
-						<div class="row">
-							<div class="col-xs-3 col-xs-offset-4" @click="[question--, remAnswer(),question0 = false, question1 = false, question2 = false, question3 = false]" v-show="question != 0">
-								Back
-							</div>
-							<div class="col-xs-3" @click.prevent=" selAns != '' ? nextClick(selAns) : noAns()">
-								Next
-							</div>
-						</div>
-					</div> <!-- col-xs-12 question -->
-				</transition-group>
-			</div>
-		</div>
-		<transition name="droppingAns">	
-			<div class="col-xs-12" id="yourArnie" v-if="yourArnie != '' ">
-				<app-answers
-					:answer="yourArnie"
-					>
-
-				</app-answers>
-			</div>
-		</transition>
-	</div>	
+							div.col-xs-6.answer-outer
+								div.answer-tile(
+									@click='[selectAns(2),selAns = q.answersText[2].Movie]'
+									v-bind:class='{ selectedAns3: question2 }'
+								)
+									| {{ q.answersText[2].Answer }}
+								
+							div.col-xs-6.answer-outer
+								div.answer-tile(
+									@click='[selectAns(3),selAns = q.answersText[3].Movie]'
+									v-bind:class='{ selectedAns4: question3 }'
+								)
+									| {{ q.answersText[3].Answer }}
+								
+							| {{ answers }}
+						div.row
+							div.col-xs-3.col-xs-offset-4(
+								@click='[question--, remAnswer(),question0 = false, question1 = false, question2 = false, question3 = false]'
+								v-show='question != 0'
+							)
+								| Back
+							
+							div.col-xs-3(
+								@click.prevent=' selAns != "" ? nextClick(selAns) : noAns()'
+							)
+								| Next
+							
+			div.col-xs-12#yourArnie(v-if="yourArnie != ''")
+				app-answers(
+					v-bind:answer="yourArnie"
+				)
+	
 </template>
 
 <script>
@@ -85,13 +80,11 @@
 				question1: false,
 				question2: false,
 				question3: false,
-				// question: 0,
-				question: 9,
+				question: 0,
 				arnQuest: 'app-quest-one',
-				// answers: [],
-				answers: ["A","A","A","A","A","A","A","A","A"],
+				answers: [],
 				bgColor: false,
-				transName: 'changeq',
+				transChg: 'drop-in',
 				yourArnie: '',
 				questions: {
 					question1: {
@@ -188,12 +181,32 @@
 			}	
 		},
 		methods: {
+			chooseTrans() {
+				var vm = this
+				var rand = (Math.random() * (5 - 1) + 1).toFixed()
+				switch(rand) {
+					case '1':
+						vm.transChg = 'drop-in'
+						break
+					case '2':
+						vm.transChg = 'faze-out'
+						break
+					case '3':
+						vm.transChg = 'fadein'
+						break
+					case '4':
+						vm.transChg = 'twist-out'
+						break
+					case '5':
+						vm.transChg = 'shrink'
+						break
+				}
+			},
 			addAnswer(item) {
-				this.answers.push(item);
+				this.answers.push(item)
 			},
 			remAnswer() {
 				var length = this.answers.length - 1;
-				console.log(length);
 				this.answers.splice(length, 1);
 			},
 			selectAns(item) {
@@ -225,9 +238,10 @@
 				}
 			},
 			nextClick(selAns) {
-				this.question++;
+				this.chooseTrans()
 				if(this.question == 10) {
 					this.addAnswer(selAns);
+					this.question++;
 					this.calcAns();
 				} else {
 					this.addAnswer(selAns);
@@ -236,6 +250,7 @@
 					this.question1 = false;
 					this.question2 = false;
 					this.question3 = false;
+					this.question++;
 				}
 			},
 			noAns() {
@@ -298,6 +313,80 @@
 
 	div {
 		color: white;
+	}
+
+	.drop-in-enter-active {
+		transition: all 4s;
+	}
+
+	.drop-in-leave-active {
+		transition: all 3s ease-out;
+	}
+
+	.drop-in-enter, .drop-in-leave-to {
+		transform: translateY(150px);
+		opacity: 0;
+	}
+
+	.faze-out-enter-active, .faze-out-leave-active {
+		transition: all 2s;
+	}
+ 
+	.faze-out-enter, .faze-out-leave-to {
+		transform: perspective(0px) rotateY(90deg);
+		opacity: 0;
+	}
+
+	.fadein-enter {
+		transform: perspective(100px) translateY(200px);
+		opacity: 0;
+	}
+
+	.fadein-enter-active {
+		transition: all 3s ease-out;
+	}
+
+	.fadein-leave-active {
+		transition: all 2s;
+	}
+
+	.fadein-leave-to {
+		transform: translateX(2000px);
+	}
+
+	.twist-out-enter {
+		transform: scale(.5) rotate3d(2,1,1,80deg);
+	}
+
+	.twist-out-enter-active {
+		transition: all 5s;
+	}
+
+	.twist-out-leave-active {
+		transition: all 3s;
+	}
+
+	.twist-out-leave-to {
+		transform: scale(0) rotate3d(4,3,1,580deg);
+		opacity: 0;
+	}
+
+	.shrink-enter {
+		transform: scale(0) rotateZ(360deg);
+		opacity: 0;
+	}
+
+	.shrink-enter-active {
+		transition: all 3s ease-in;
+	}
+
+	.shrink-leave-active {
+		transition: transform, opacity 1.5s, 1s linear, ease-out;
+	}
+
+	.shrink-leave-to {
+		transform: scale(0);
+		opacity: 0;
 	}
 
 	.droppingAns-enter {
