@@ -1,15 +1,27 @@
 <template lang="pug">
-	div.col-xs-8.col-xs-offset-2.text-center.all-arnie
-		app-initial
-		div.topAns(
-			ref='topAnswer'
+	div.col-xs-12
+		div.col-xs-12.arnLoad(
+			v-if='arnCurl'
 		)
-			| Your Arnie Is
-		div.arnWho
-			| {{ arnieGrp.arnieType }}
-		div.arnImg
-			img(v-bind:src='arnieGrp.arnieImg')
+			div.center-block.text-center.arnPump
+				img(
+					src='../../assets/arnie-curls.gif'
+				)
 
+		div.col-xs-8.col-xs-offset-2.text-center.all-arnie(
+			v-else
+		)
+			div.topAns(
+				ref='topAnswer'
+			)
+				| Your Arnie Is
+			div.arnWho
+				| {{ arnieGrp.arnieType }}
+			div.arnImg
+				img(v-bind:src='arnieGrp.arnieImg')
+			app-initial
+		div.citybg
+				img(src='../../assets/city2.png' v-bind:style='raiseCity')
 </template>
 
 <script>
@@ -27,7 +39,11 @@
 					arnieImg: '',
 					arnieSum: ''
 				},
-				changeBack: 'black'
+				raiseCity: {
+					bottom: 0
+				},
+				changeBack: 'black',
+				arnCurl: true
 			}
 		},
 		methods: {
@@ -79,16 +95,34 @@
 						this.arnieGrp.arnieSum = 'How could you use my name? You didn\'t ask permission. Look at my muscles, it doesn\'t even look the same.' 
 						break
 				}
+			},
+			cityRaise() {
+				var vm = this
+				this.raiseCity.bottom = -300 + 'px'
+				var a = -300
+				var raiseCity = setInterval(function() {
+					if(a == 0) {
+						clearInterval(raiseCity)
+					} else {
+						a += 3
+						vm.raiseCity.bottom = a +'px'
+					}
+				},40)
 			}
 		},
 		components: {
 			appInitial: initial
 		},
 		created() {
-			var change = this.changeBack;
-			eventBus.changeBg(change);
+			var change = this.changeBack
+			eventBus.changeBg(change)
+			var arnPros = setTimeout(function() {
+				vm.arnCurl = false
+			},4000)
 			var answer = this.arnieAns
 			this.chooseArn(answer)
+			var vm = this
+			this.cityRaise()
 		}
 	}
 			
@@ -106,15 +140,29 @@
 	}
 
 	.all-arnie img {
-		width: 300px;
-		border: 15px ridge gray;
+		width: 200px;
 	}
 
 	.all-arnie {
-		background: #5c116d;
-		border: 10px solid gold;
 		padding: 15px;
-		margin-bottom: 50px;
+		height: 95vh;
+		z-index: 1;
+	}
+
+	.citybg img {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		width: 100vw;
+		z-index: 0;
+	}
+
+	.arnLoad {
+		height: 100vw;
+	}
+
+	.arnPump img {
+		width: 150px;
 	}
 
 </style>

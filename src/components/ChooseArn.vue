@@ -1,19 +1,24 @@
 <template lang="pug">
 	div.row
 		div.col-xs-12.quest-contain
-	
-			div(v-for='(q, key, index) in questions')
 
-				transition-group(
+			div(
+				v-if="yourArnie == null"
+			)
+	
+				transition(
 					v-bind:name='transChg'
 					mode='out-in'
 					tag='p'
 				)
-					
-					div.question.col-xs-12(v-if='question == index' v-bind:key='q')
+						
+					div.question.col-xs-12(
+						v-for='(q, keys, index) in questions'
+						v-if='question == index'
+						v-bind:key='keys'
+					)
 						div
 							| Question {{ question + 1 }}
-							| {{ transChg }}
 							hr
 
 							div.quest-text
@@ -61,7 +66,7 @@
 							)
 								| Next
 							
-			div.col-xs-12#yourArnie(v-if="yourArnie != ''")
+			div.col-xs-12#yourArnie(v-if="yourArnie != null")
 				app-answers(
 					v-bind:answer="yourArnie"
 				)
@@ -80,12 +85,14 @@
 				question1: false,
 				question2: false,
 				question3: false,
-				question: 0,
+				// question: 0,
+				question: 9,
 				arnQuest: 'app-quest-one',
-				answers: [],
+				// answers: [],
+				answers: ['A','A','A','A','A','A','A','A','A'],
 				bgColor: false,
 				transChg: 'drop-in',
-				yourArnie: '',
+				yourArnie: null,
 				questions: {
 					question1: {
 						questText: 'If you find yourself face to face with your biggest enemy, what would be the first thing you say to them?',
@@ -239,18 +246,18 @@
 			},
 			nextClick(selAns) {
 				this.chooseTrans()
-				if(this.question == 10) {
-					this.addAnswer(selAns);
-					this.question++;
-					this.calcAns();
+				if(this.question == 9) {
+					this.addAnswer(selAns)
+					this.question++
+					this.calcAns()
 				} else {
-					this.addAnswer(selAns);
-					this.selAns = '';
-					this.question0 = false;
-					this.question1 = false;
-					this.question2 = false;
-					this.question3 = false;
-					this.question++;
+					this.addAnswer(selAns)
+					this.selAns = ''
+					this.question0 = false
+					this.question1 = false
+					this.question2 = false
+					this.question3 = false
+					this.question++
 				}
 			},
 			noAns() {
