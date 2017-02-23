@@ -1,48 +1,71 @@
 <template lang="pug">
   div#arnie-row.row
+
     div.col-xs-12(:style='dropping')
+
       div.row
+
         div#whos.col-xs-12
+
           img.img-responsive.center-block(
             src='../assets/whos.png'
             v-bind:style='{ opacity: opacity }'
           )
+
         div.col-xs-12
+
           div#arnie
+
             img(src='../assets/arnie-fr-1300.png')#arnie-fr.img-responsive.center-block
+
           div#fav.col-xs-12
+
             img.img-responsive.center-block(
               src='../assets/fav.png'
               v-bind:style='{ opacity: opacity }'
               )
+
     div(:style='{ opacity: opacity }' v-if='showPick')#frontPick.col-xs-8.col-xs-offset-2
+
       div.row
+
         div.col-xs-1.col-xs-offset-2
+
           img(
             src='../assets/arrow.png'
             v-if='arrowShow'
             v-bind:style='{ visibility: arrVis }'
           )
-        div.col-xs-9.picktext(
+
+        router-link(
+          tag="div"
+          class="col-xs-9 picktext"
           style='cursor: pointer'
+          v-bind:to='questionsLink'
           v-bind:class='{ pickact: isActive }'
           @mouseover='[isActive = true, arrowShow = true]'
           @click='chooseArnie'
         )
+
           p Choose Ur Arnie
+
         div.col-xs-1.col-xs-offset-2
+
           img(
             src='../assets/arrow.png'
             v-if='!arrowShow'
             v-bind:style='{ visibility: arrVis }'
           )
+
         div.col-xs-9.picktext(
           style='cursor: pointer'
           v-bind:class='{ pickact: !isActive }'
           @mouseover='[isActive = false, arrowShow = false]'
           @click="chooseAll"
         )
+
           p Everyones Else's Fav Arnie
+
         
 </template>
 
@@ -59,7 +82,10 @@ export default {
       isActive: '',
       hideArrow: 'none',
       arrVis: 'visible',
-      showPick: true
+      showPick: true,
+      questionsLink: {
+        name: 'Questions'
+      }
     }
   },
 	methods: {
@@ -108,6 +134,13 @@ export default {
   beforeMount() {
     this.dropArnie()
     playSound()
+  },
+  beforeRouteEnter(to, from, next) {
+    if (true) {
+        next()
+    } else {
+        next(false)
+    }
   }
 }
 

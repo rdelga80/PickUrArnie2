@@ -3,12 +3,9 @@
     div.row
       div#app.col-xs-12
         transition(name='exit')
+          router-view
           <!-- switch between components based on click within component -->
-          component(
-            :is='currentComp'
-            @startChoice='currentComp = $event'
-            @endSound='endSound = $event'
-          )
+          
 
 </template>
 
