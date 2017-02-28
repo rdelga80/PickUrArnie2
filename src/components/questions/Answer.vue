@@ -1,15 +1,7 @@
 <template lang="pug">
 	div.col-xs-12
-		div.col-xs-12.arnLoad(
-			v-if='arnCurl'
-		)
-			div.center-block.text-center.arnPump
-				img(
-					src='../../assets/arnie-curls.gif'
-				)
-
 		div.col-xs-8.col-xs-offset-2.text-center.all-arnie(
-			v-else
+			
 		)
 			div.topAns(
 				ref='topAnswer'
@@ -19,7 +11,23 @@
 				| {{ arnieGrp.arnieType }}
 			div.arnImg
 				img(v-bind:src='arnieGrp.arnieImg')
-			app-initial
+			div.textDesc
+				| Use  
+				span.glyphicon.glyphicon-arrow-up
+				|  OR
+				span.glyphicon.glyphicon-arrow-down
+				|  To Enter Initials
+				
+			app-initial(
+				v-on:arn-initials="arnInit.initials = $event"
+			)
+
+			div
+				button.btn.btn-primary(
+					@click.prevent='submit'
+				)
+					| Share Your Arnie
+			
 		div.citybg
 				img(src='../../assets/city2.png' v-bind:style='raiseCity')
 </template>
@@ -39,11 +47,15 @@
 					arnieImg: '',
 					arnieSum: ''
 				},
+				arnInit: {
+					initials: ''
+				},
 				raiseCity: {
 					bottom: 0
 				},
 				changeBack: 'black',
-				arnCurl: true
+				arnCurl: true,
+				resource: {}
 			}
 		},
 		methods: {
@@ -108,6 +120,9 @@
 						vm.raiseCity.bottom = a +'px'
 					}
 				},40)
+			},
+			submit() {
+				this.resource.saveAlt(this.arnInit)
 			}
 		},
 		components: {
@@ -123,6 +138,19 @@
 			this.chooseArn(answer)
 			var vm = this
 			this.cityRaise()
+
+			const customActions = {
+				saveAlt: { method: 'POST', url: 'arnie.json' },
+				getData: { method: 'GET'}
+			}
+			this.resource = this.$resource('{node}.json', {}, customActions)
+		},
+        beforeRouteEnter(to, from, next) {
+            if (true) {
+                next()
+            } else {
+                next(false)
+            }
 		}
 	}
 			
@@ -132,10 +160,20 @@
 <style>
 	.topAns {
 		color: white;
-		font-size: 30px;
+		font-size: 3.3em;
+		height: 160px;
+		padding-top: 40px;
+		background: url('../../assets/banner.png') no-repeat center top;
+		background-size: 500px 160px;
+	}
+
+	.topAns, .arnWho {
+		font-family: 'VT323', monospace;
 	}
 
 	.arnWho {
+		color: white;
+		text-transform: uppercase;
 		font-size: 70px;
 	}
 
@@ -163,6 +201,12 @@
 
 	.arnPump img {
 		width: 150px;
+	}
+
+	.textDesc {
+		color: white;
+		margin-top: 30px;
+		font-size: 2em;
 	}
 
 </style>

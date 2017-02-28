@@ -3,7 +3,7 @@
 		div.col-xs-12.quest-contain
 
 			div(
-				v-if="yourArnie == null"
+				v-if="loading == false"
 			)
 	
 				transition(
@@ -62,20 +62,49 @@
 								| Back
 							
 							div.col-xs-3(
-								@click.prevent=' selAns != "" ? nextClick(selAns) : noAns()'
+								@click.prevent='selAns != "" ? nextClick(selAns) : noAns()'
+								v-if='question != 9'
 							)
 								| Next
-							
-			div.col-xs-12#yourArnie(v-if="yourArnie != null")
-				app-answers(
-					v-bind:answer="yourArnie"
+
+							div.col-xs-3(
+								@click.prevent='selAns != "" ? nextClick(selAns) : noAns()'
+								tag="div"
+								class="col-xs-3"
+								v-else
+							)
+								| Argh!
+			transition(
+				name="opac-in"
+			)
+				div.col-xs-12#load-screen(
+					v-if='loading == true'
 				)
+					transition(
+						name="opac-in"
+						mode="out-in"
+					)
+						div(
+							v-if='findOut'
+						)
+							img#arn-curl.center-block(
+								style="max-width: 400px;"
+								src='../assets/arnie-curls.gif'
+							)
+							
+							div.col-xs-4.col-xs-offset-4.text-center
+								| Calculating Your Answers
+
+						router-link.btn.btn-primary.center-block.vert-center(
+							tag="button"
+							v-bind:to='answersLink'
+							v-if='findOut == false'
+						)
+							| View Your Arnie
 	
 </template>
 
 <script>
-
-	import answers from './questions/Answer.vue';
 
 	export default {
 		data() {
@@ -93,6 +122,14 @@
 				bgColor: false,
 				transChg: 'drop-in',
 				yourArnie: null,
+				findOut: true,
+				loading: false,
+				answersLink: {
+					name: 'Answer',
+					params: {
+						answer: ''
+					}
+				},
 				questions: {
 					question1: {
 						questText: 'If you find yourself face to face with your biggest enemy, what would be the first thing you say to them?',
@@ -249,7 +286,12 @@
 				if(this.question == 9) {
 					this.addAnswer(selAns)
 					this.question++
+					this.loading = true
 					this.calcAns()
+					const vm = this
+					var fadeCurls = setTimeout(function() {
+						vm.findOut = false
+					},4000)
 				} else {
 					this.addAnswer(selAns)
 					this.selAns = ''
@@ -305,12 +347,9 @@
 				var ansMatrix = [{'A': a},{'B': b},{'C': c},{'D': d},{'E': e},{'F': f},{'G': g},{'H': h}];
 				var sortMatrix = ansMatrix.sort();
 				for (var arnKey in sortMatrix[0]) {
-					this.yourArnie = arnKey
+					this.answersLink.params.answer = arnKey
 				}
 			}
-		},
-		components: {
-			appAnswers: answers
 		}
 	}
 	
@@ -320,6 +359,14 @@
 
 	div {
 		color: white;
+	}
+
+	.opac-in-enter, .opac-in-leave-to {
+		opacity: 0;
+	}
+
+	.opac-in-enter-active, .opac-in-leave-active {
+		transition: opacity 3s;
 	}
 
 	.drop-in-enter-active {
@@ -489,4 +536,32 @@
 		background-color: red;
 	}
 	
+	#load-screen {
+		height: 100%;
+	    width: 100%;
+	    position: fixed; /* Stay in place */
+	    z-index: 1; /* Sit on top */
+	    left: 0;
+	    top: 0;
+	    background-color: rgba(0,0,0, 0.3);
+	}
+
+	#arn-curl {
+		position: relative;
+	    top: 15%; /* 25% from the top */
+	    width: 100%; /* 100% width */
+	    text-align: center; /* Centered text/links */
+	    margin-top: 30px;
+	}
+
+	#arn-curl img {
+		width: 75%;
+		max-width: 400px;
+	}
+
+	.vert-center {
+		margin-top: 20%;
+		font-size: 3em;
+	}
+
 </style>

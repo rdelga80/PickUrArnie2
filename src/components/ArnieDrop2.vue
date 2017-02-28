@@ -57,8 +57,11 @@
             v-bind:style='{ visibility: arrVis }'
           )
 
-        div.col-xs-9.picktext(
+        router-link(
+          tag='div'
+          class='col-xs-9 picktext'
           style='cursor: pointer'
+          v-bind:to='aarnLink'
           v-bind:class='{ pickact: !isActive }'
           @mouseover='[isActive = false, arrowShow = false]'
           @click="chooseAll"
@@ -85,6 +88,9 @@ export default {
       showPick: true,
       questionsLink: {
         name: 'Questions'
+      },
+      aarnLink: {
+        name: 'AllArnie'
       }
     }
   },

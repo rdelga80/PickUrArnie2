@@ -12,9 +12,16 @@ const Answer = resolve => {
 	})
 }
 
+const AllArnie = resolve => {
+	require.ensure(['./components/AllArnie.vue'], () => {
+		resolve(require('./components/AllArnie.vue'))
+	})
+}
+
 export const routes = [
 	{ path: '/', name: 'Home', component: ArnieDrop },
-	{ path: '/questions', name: 'Questions', component: Questions },
-	{ path: '/your-arnie', name: 'Answer', component: Answer },
+	{ path: '/all_arnie', name: 'AllArnie', component: AllArnie },
+	{ path: '/questions', props: true, name: 'Questions', component: Questions },
+	{ path: '/your_arnie', props: true, name: 'Answer', component: Answer },
 	{ path: '*', redirect: '/' }
 ]
