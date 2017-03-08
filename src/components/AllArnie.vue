@@ -1,19 +1,49 @@
 <template lang="pug">
 	div
-		div(
-			v-for='u in users'
-			style='color: white; font-size: 3em;'
+		div.col-xs-12(
+			v-for='entries in arnieDB'
 		)
-			| {{ u.initials }}
+						
+			div.col-xs-12.text-center
+				router-link(
+					tag='button'
+					class='btn btn-primary text-center'
+					v-bind:to='{ name: "Home" }'
+				)
+					| Back to Arnie
+
+			div.row.headline.text-center
+				div.col-xs-3
+					| Initials
+				div.col-xs-6
+					| Arnie
+				div.col-xs-3
+					| Argh!
+
+			div.col-xs-12(
+				v-for='entry in entries'
+				style='color: white; font-size: 3em;'
+			)
+				div.row.text-center
+					app-arn-data(
+						v-bind:selArn = 'entry'
+					)
+
 </template>
 
 <script>
+	import arnDet from './AllArnInfo.vue'
+
 	export default {
 		data() {
 			return {
-				users: [],
+				arnieDB: [],
 				resource: {},
-				node: 'arnie'
+				node: 'arnie',
+				selArn: '',
+				arnHome: {
+					name: 'Home'
+				}
 			}
 		},
 		methods: {
@@ -27,9 +57,12 @@
 						for (let key in data) {
 							resultArray.push(data[key])
 						}
-						this.users = resultArray;
+						this.arnieDB = resultArray;
 					})
 			}
+		},
+		components: {
+			'app-arn-data': arnDet
 		},
 		created() {
 			const customActions = {
@@ -38,10 +71,23 @@
 			}
 			this.resource = this.$resource('{node}.json', {}, customActions)
 			this.fetchData()
+		},
+		beforeRouteEnter(to, from, next) {
+			if (true) {
+				next()
+			} else {
+				next(false)
+			}
 		}
 	}
+
 </script>
 
-<style>
+<style scoped>
+	.headline {
+		font-family: 'VT323', monospace;
+		font-size: 5em;
+		color: white;
+	}
 
 </style>

@@ -1,35 +1,68 @@
 <template lang="pug">
 	div.col-xs-12
-		div.col-xs-8.col-xs-offset-2.text-center.all-arnie(
-			
+		div(
+			v-if="afterInitial"
 		)
-			div.topAns(
-				ref='topAnswer'
-			)
-				| Your Arnie Is
-			div.arnWho
-				| {{ arnieGrp.arnieType }}
-			div.arnImg
-				img(v-bind:src='arnieGrp.arnieImg')
-			div.textDesc
-				| Use  
-				span.glyphicon.glyphicon-arrow-up
-				|  OR
-				span.glyphicon.glyphicon-arrow-down
-				|  To Enter Initials
+			div.col-xs-8.col-xs-offset-2.text-center.all-arnie(
 				
-			app-initial(
-				v-on:arn-initials="arnInit.initials = $event"
 			)
-
-			div
-				button.btn.btn-primary(
-					@click.prevent='submit'
+				div.topAns(
+					ref='topAnswer'
 				)
-					| Share Your Arnie
-			
-		div.citybg
-				img(src='../../assets/city2.png' v-bind:style='raiseCity')
+					| Your Arnie Is
+				div.arnWho
+					| {{ arnieGrp.arnieType }}
+				div.arnImg
+					img(v-bind:src='arnieGrp.arnieImg')
+				div.textDesc
+					| Use  
+					span.glyphicon.glyphicon-arrow-up
+					|  OR
+					span.glyphicon.glyphicon-arrow-down
+					|  To Enter Initials
+					br
+					small
+						|Tab (Shift+Tab) To Switch Letters
+					
+				app-initial(
+					v-on:arn-initials="arnInit.initials = $event"
+				)
+
+				div
+					button.btn.btn-primary(
+						@click.prevent='[submit(), afterInitial = !afterInitial]'
+					)
+						| Share Your Arnie
+				
+			div.citybg
+					img(src='../../assets/city2.png' v-bind:style='raiseCity')
+		
+		div.col-xs-12.arnty(
+			v-else
+		)
+			div.col-xs-12.text-center.arntopthx
+				| Thank You
+
+			div.col-xs-12.center-block.text-center
+				iframe(
+					width="560"
+					height="315"
+					src="https://www.youtube.com/embed/pDxn0Xfqkgw?ecver=1"
+					frameborder="0"
+					allowfullscreen
+				)
+
+			div.col-xs-8.col-xs-offset-2.text-center.arnbttmthx
+				| On behalf of Arnie fans
+
+			div.col-xs-12.text-center
+				router-link(
+					tag='button'
+					class='btn btn-primary'
+					v-bind:to="{ name: 'Home' }"
+				)
+					| Back to Arnie
+
 </template>
 
 <script>
@@ -41,21 +74,22 @@
 		props:['answer'],
 		data () {
 			return {
-				arnieAns: this.answer,
 				arnieGrp: { 
 					arnieType: '',
 					arnieImg: '',
 					arnieSum: ''
 				},
 				arnInit: {
-					initials: ''
+					initials: '',
+					arnieAns: this.answer,
 				},
 				raiseCity: {
 					bottom: 0
 				},
 				changeBack: 'black',
 				arnCurl: true,
-				resource: {}
+				resource: {},
+				afterInitial: true
 			}
 		},
 		methods: {
@@ -67,42 +101,42 @@
 						this.arnieGrp.arnieSum = 'Whether it\'s smoking Aliens or smoking cigars, you\'re a friggin badass.'
 						break
 					case 'B':
-						this.arnieType = 'Terminator Arnie'
+						this.arnieGrp.arnieType = 'Terminator Arnie'
 						this.arnieGrp.arnieImg = '../src/assets/arnie2.jpg'
 						this.arnieGrp.arnieSum = 'You prove that being a robot is no excuse for a depriving yourself of a catchy one-liner.'
 						break
 					case 'C':
-						this.arnieType = 'Total Recall'
+						this.arnieGrp.arnieType = 'Total Recall Arnie'
 						this.arnieGrp.arnieImg = '../src/assets/arnie3.jpg'
 						this.arnieGrp.arnieSum = 'Do you even exist? Is this world even real? The answer lies with creepy baby mutants.'
 						break
 					case 'D':
-						this.arnieType = 'Conan Arnie'
+						this.arnieGrp.arnieType = 'Conan Arnie'
 						this.arnieGrp.arnieImg = '../src/assets/arnie4.jpg'
 						this.arnieGrp.arnieSum = 'Wasn\'t there a cartoon for Conan the Barbarian in the 90\'s that basically tried saying that the bad guys were snake Aliens? Crom!'
 						break
 					case 'E':
-						this.arnieType = 'Kindergarten Cop Arnie'
+						this.arnieGrp.arnieType = 'Kindergarten Cop Arnie'
 						this.arnieGrp.arnieImg = '../src/assets/arnie5.jpg'
 						this.arnieGrp.arnieSum = 'Don\'t you wish there was a show about John Kimble before he became Kindergarten Cop?'
 						break
 					case 'F':
-						this.arnieType = 'Twins Arnie'
+						this.arnieGrp.arnieType = 'Twins Arnie'
 						this.arnieGrp.arnieImg = '../src/assets/arnie6.jpg'
 						this.arnieGrp.arnieSum = 'Are you my father? Well, you must be because you chose me.'
 						break
 					case 'G':
-						this.arnieType = 'Jingle All The Arnie'
+						this.arnieGrp.arnieType = 'Jingle All The Arnie'
 						this.arnieGrp.arnieImg = '../src/assets/arnie7.jpg'
 						this.arnieGrp.arnieSum = 'Are you my father?'
 						break
 					case 'H':
-						this.arnieType = 'Pumping Iron Arnie'
+						this.arnieGrp.arnieType = 'Pumping Iron Arnie'
 						this.arnieGrp.arnieImg = '../src/assets/arnie8.jpg'
 						this.arnieGrp.arnieSum = 'Perfection. Of course.'
 						break
 					case 'I':
-						this.arnieType = 'Hercules Arnie'
+						this.arnieGrp.arnieType = 'Hercules Arnie'
 						this.arnieGrp.arnieImg = '../src/assets/arnie9.jpg'
 						this.arnieGrp.arnieSum = 'How could you use my name? You didn\'t ask permission. Look at my muscles, it doesn\'t even look the same.' 
 						break
@@ -134,7 +168,7 @@
 			var arnPros = setTimeout(function() {
 				vm.arnCurl = false
 			},4000)
-			var answer = this.arnieAns
+			var answer = this.arnInit.arnieAns
 			this.chooseArn(answer)
 			var vm = this
 			this.cityRaise()
@@ -157,7 +191,7 @@
 	
 </script>
 
-<style>
+<style scoped>
 	.topAns {
 		color: white;
 		font-size: 3.3em;
@@ -165,6 +199,7 @@
 		padding-top: 40px;
 		background: url('../../assets/banner.png') no-repeat center top;
 		background-size: 500px 160px;
+		text-shadow: 2px 2px #888;
 	}
 
 	.topAns, .arnWho {
@@ -183,7 +218,7 @@
 
 	.all-arnie {
 		padding: 15px;
-		height: 95vh;
+		height: 100vh;
 		z-index: 1;
 	}
 
@@ -207,6 +242,20 @@
 		color: white;
 		margin-top: 30px;
 		font-size: 2em;
+	}
+
+	.arnty {
+		height: 100vh;
+	}
+
+	.arntopthx {
+		font-family: 'VT323', monospace;
+		font-size: 3em;
+		color: #FFF;
+	}
+
+	.arnbttmthx {
+		color: #FFF;
 	}
 
 </style>

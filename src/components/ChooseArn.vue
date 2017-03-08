@@ -68,7 +68,7 @@
 								| Next
 
 							div.col-xs-3(
-								@click.prevent='selAns != "" ? nextClick(selAns) : noAns()'
+								@click.prevent='selAns != "" ? finAns(selAns) : noAns()'
 								tag="div"
 								class="col-xs-3"
 								v-else
@@ -118,7 +118,7 @@
 				question: 9,
 				arnQuest: 'app-quest-one',
 				// answers: [],
-				answers: ['A','A','A','A','A','A','A','A','A'],
+				answers: ['C','C','C','C','C','C','C','C','C'],
 				bgColor: false,
 				transChg: 'drop-in',
 				yourArnie: null,
@@ -283,24 +283,23 @@
 			},
 			nextClick(selAns) {
 				this.chooseTrans()
-				if(this.question == 9) {
-					this.addAnswer(selAns)
-					this.question++
-					this.loading = true
-					this.calcAns()
-					const vm = this
-					var fadeCurls = setTimeout(function() {
-						vm.findOut = false
-					},4000)
-				} else {
-					this.addAnswer(selAns)
-					this.selAns = ''
-					this.question0 = false
-					this.question1 = false
-					this.question2 = false
-					this.question3 = false
-					this.question++
-				}
+				this.addAnswer(selAns)
+				this.selAns = ''
+				this.question0 = false
+				this.question1 = false
+				this.question2 = false
+				this.question3 = false
+				this.question++
+			},
+			finAns(selAns) {
+				this.addAnswer(selAns)
+				this.question++
+				this.loading = true
+				this.calcAns()
+				const vm = this
+				var fadeCurls = setTimeout(function() {
+					vm.findOut = false
+				},4000)
 			},
 			noAns() {
 				alert('Dats Not An Answer!');
@@ -319,39 +318,51 @@
 					var sel = this.answers[i];
 					switch(sel) {
 						case 'A':
-							a++;
-							break;
+							a++
+							break
 						case 'B':
-							b++;
-							break;
+							b++
+							break
 						case 'C':
-							c++;
-							break;
+							c++
+							break
 						case 'D':
-							d++;
-							break;
+							d++
+							break
 						case 'E':
-							e++;
-							break;
+							e++
+							break
 						case 'F':
-							f++;
-							break;
+							f++
+							break
 						case 'G':
-							g++;
-							break;
+							g++
+							break
 						case 'H':
-							h++;
-							break;
+							h++
+							break
 					}
 				}
-				var ansMatrix = [{'A': a},{'B': b},{'C': c},{'D': d},{'E': e},{'F': f},{'G': g},{'H': h}];
-				var sortMatrix = ansMatrix.sort();
-				for (var arnKey in sortMatrix[0]) {
-					this.answersLink.params.answer = arnKey
-				}
+				var ansMatrix = [
+					{ 'answer': 'A', 'count': a },
+					{ 'answer': 'B', 'count': b },
+					{ 'answer': 'C', 'count': c },
+					{ 'answer': 'D', 'count': d },
+					{ 'answer': 'E', 'count': e },
+					{ 'answer': 'F', 'count': f },
+					{ 'answer': 'G', 'count': g },
+					{ 'answer': 'H', 'count': h }
+				]
+				var sortMatrix = ansMatrix.sort(function(a, b) {
+					return a.count - b.count
+				})
+				const smAns = sortMatrix[7]
+				const smVal = Object.values(smAns)
+				this.answersLink.params.answer = smVal[0]
 			}
 		}
 	}
+	
 	
 </script>
 
