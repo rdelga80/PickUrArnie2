@@ -20,8 +20,8 @@ const AllArnie = resolve => {
 
 export const routes = [
 	{ path: '', name: 'Home', component: ArnieDrop },
-	{ path: 'all_arnie', name: 'AllArnie', component: AllArnie },
-	{ path: 'questions', props: true, name: 'Questions', component: Questions },
-	{ path: 'your_arnie', props: true, name: 'Answer', component: Answer },
+	{ path: '/all_arnie', name: 'AllArnie', component: AllArnie },
+	{ path: '/questions', props: true, name: 'Questions', component: Questions },
+	{ path: '/your_arnie', props: true, name: 'Answer', component: Answer },
 	{ path: '*', redirect: '' }
 ]
