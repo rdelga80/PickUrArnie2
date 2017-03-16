@@ -58,7 +58,7 @@ export default {
 <style>
 
   body {
-    background: url('assets/arnie-bg.jpg') repeat-x #e3165b;
+    background: url('../src/assets/arnie-bg.jpg') repeat-x #e3165b;
   }
 
   .turnBlack {
