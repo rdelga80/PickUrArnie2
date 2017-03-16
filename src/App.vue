@@ -19,7 +19,7 @@ export default {
   data: function () {
     return {
       currentComp: arnieDrop,
-      musicSrc: '/src/assets/start.mp3',
+      musicSrc: 'assets/start.mp3',
       contWid: null,
       isBlack: null
     }
@@ -58,7 +58,7 @@ export default {
 <style>
 
   body {
-    background: url('/src/assets/arnie-bg.jpg') repeat-x #e3165b;
+    background: url('assets/arnie-bg.jpg') repeat-x #e3165b;
   }
 
   .turnBlack {
