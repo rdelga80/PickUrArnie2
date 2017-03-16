@@ -150,7 +150,7 @@ export default {
   }
 }
 
-var sound = new Audio('../../src/assets/start.mp3')
+var sound = new Audio('src/assets/start.mp3')
 
 function playSound() {
   sound.play()
