@@ -97,47 +97,47 @@
 				switch(e) {
 					case 'A':
 						this.arnieGrp.arnieType = 'Predator Arnie'
-						this.arnieGrp.arnieImg = '../src/assets/arnie1.jpg'
+						this.arnieGrp.arnieImg = 'src/assets/arnie1.jpg'
 						this.arnieGrp.arnieSum = 'Whether it\'s smoking Aliens or smoking cigars, you\'re a friggin badass.'
 						break
 					case 'B':
 						this.arnieGrp.arnieType = 'Terminator Arnie'
-						this.arnieGrp.arnieImg = '../src/assets/arnie2.jpg'
+						this.arnieGrp.arnieImg = 'src/assets/arnie2.jpg'
 						this.arnieGrp.arnieSum = 'You prove that being a robot is no excuse for a depriving yourself of a catchy one-liner.'
 						break
 					case 'C':
 						this.arnieGrp.arnieType = 'Total Recall Arnie'
-						this.arnieGrp.arnieImg = '../src/assets/arnie3.jpg'
+						this.arnieGrp.arnieImg = 'src/assets/arnie3.jpg'
 						this.arnieGrp.arnieSum = 'Do you even exist? Is this world even real? The answer lies with creepy baby mutants.'
 						break
 					case 'D':
 						this.arnieGrp.arnieType = 'Conan Arnie'
-						this.arnieGrp.arnieImg = '../src/assets/arnie4.jpg'
+						this.arnieGrp.arnieImg = 'src/assets/arnie4.jpg'
 						this.arnieGrp.arnieSum = 'Wasn\'t there a cartoon for Conan the Barbarian in the 90\'s that basically tried saying that the bad guys were snake Aliens? Crom!'
 						break
 					case 'E':
 						this.arnieGrp.arnieType = 'Kindergarten Cop Arnie'
-						this.arnieGrp.arnieImg = '../src/assets/arnie5.jpg'
+						this.arnieGrp.arnieImg = 'src/assets/arnie5.jpg'
 						this.arnieGrp.arnieSum = 'Don\'t you wish there was a show about John Kimble before he became Kindergarten Cop?'
 						break
 					case 'F':
 						this.arnieGrp.arnieType = 'Twins Arnie'
-						this.arnieGrp.arnieImg = '../src/assets/arnie6.jpg'
+						this.arnieGrp.arnieImg = 'src/assets/arnie6.jpg'
 						this.arnieGrp.arnieSum = 'Are you my father? Well, you must be because you chose me.'
 						break
 					case 'G':
 						this.arnieGrp.arnieType = 'Jingle All The Arnie'
-						this.arnieGrp.arnieImg = '../src/assets/arnie7.jpg'
+						this.arnieGrp.arnieImg = 'src/assets/arnie7.jpg'
 						this.arnieGrp.arnieSum = 'Are you my father?'
 						break
 					case 'H':
 						this.arnieGrp.arnieType = 'Pumping Iron Arnie'
-						this.arnieGrp.arnieImg = '../src/assets/arnie8.jpg'
+						this.arnieGrp.arnieImg = 'src/assets/arnie8.jpg'
 						this.arnieGrp.arnieSum = 'Perfection. Of course.'
 						break
 					case 'I':
 						this.arnieGrp.arnieType = 'Hercules Arnie'
-						this.arnieGrp.arnieImg = '../src/assets/arnie9.jpg'
+						this.arnieGrp.arnieImg = 'src/assets/arnie9.jpg'
 						this.arnieGrp.arnieSum = 'How could you use my name? You didn\'t ask permission. Look at my muscles, it doesn\'t even look the same.' 
 						break
 				}
