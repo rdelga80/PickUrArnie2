@@ -2,3 +2,4 @@
 [0203/141132:ERROR:exception_snapshot_win.cc(87)] thread ID 856 not found in process
 [0203/141132:WARNING:crash_report_exception_handler.cc(61)] ProcessSnapshotWin::Initialize failed
 [0203/141132:ERROR:scoped_process_suspend.cc(38)] NtResumeProcess: An attempt was made to access an exiting process.  (0xc000010a)
+[0323/160544.794:ERROR:exception_handler_server.cc(524)] ConnectNamedPipe: The pipe is being closed. (0xE8)

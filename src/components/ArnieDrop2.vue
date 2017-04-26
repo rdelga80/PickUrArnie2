@@ -91,7 +91,8 @@ export default {
       },
       aarnLink: {
         name: 'AllArnie'
-      }
+      },
+      sound: new Audio('/src/assets/start.mp3')
     }
   },
 	methods: {
@@ -128,18 +129,25 @@ export default {
     	}, 1000)
     },
     chooseArnie() {
+      this.playSound('off')
       this.showPick = false
-      pauseSound()
       this.$emit('startChoice', 'chooseArnie')
     },
     chooseAll() {
     	this.$emit('startChoice', 'chooseAll')
-      pauseSound()
+    },
+    playSound(a) {
+      if (a == 'on') {
+        var audio = this.sound
+        audio.play()
+      } else {
+        audio.pause()
+      }
     }
   },
   beforeMount() {
     this.dropArnie()
-    playSound()
+    this.playSound('on')
   },
   beforeRouteEnter(to, from, next) {
     if (true) {
@@ -150,15 +158,16 @@ export default {
   }
 }
 
-var sound = new Audio('src/assets/start.mp3')
+// var sound = new Audio('src/assets/start.mp3')
 
-function playSound() {
-  sound.play()
-}
+// function playSound() {
+//   sound.play()
+// }
 
-function pauseSound() {
-  sound.pause()
-}
+// function pauseSound() {
+//   sound.pause()
+//   sound.currentTime = 0
+// }
 
 </script>
 
@@ -209,8 +218,6 @@ function pauseSound() {
 	background: -webkit-linear-gradient(#ff0000, #fff600);
   	-webkit-background-clip: text;
   	-webkit-text-fill-color: transparent;
-  	/*-webkit-text-stroke: 1px #666;*/
-  	/*text-shadow: 2px 2px 20px #bbb;*/
   }
 
   .pickact {
