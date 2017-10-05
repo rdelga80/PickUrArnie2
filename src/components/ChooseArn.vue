@@ -53,21 +53,20 @@
 								)
 									| {{ q.answersText[3].Answer }}
 								
-							| {{ answers }}
 						div.row
-							div.col-xs-3.col-xs-offset-4(
+							div.col-xs-3.col-xs-offset-2.btn.btn-info.arn-btn(
 								@click='[question--, remAnswer(),question0 = false, question1 = false, question2 = false, question3 = false]'
 								v-show='question != 0'
 							)
 								| Back
 							
-							div.col-xs-3(
+							div.col-xs-3.col-xs-offset-2.btn.btn-warning.arn-btn(
 								@click.prevent='selAns != "" ? nextClick(selAns) : noAns()'
 								v-if='question != 9'
 							)
 								| Next
 
-							div.col-xs-3(
+							div.col-xs-3.col-xs-offset-2.btn.btn-success.arn-btn(
 								@click.prevent='selAns != "" ? finAns(selAns) : noAns()'
 								tag="div"
 								class="col-xs-3"
@@ -92,10 +91,10 @@
 								src='../assets/arnie-curls.gif'
 							)
 							
-							div.col-xs-4.col-xs-offset-4.text-center
+							div.col-xs-4.col-xs-offset-4.text-center.cal-ans
 								| Calculating Your Answers
 
-						router-link.btn.btn-primary.center-block.vert-center(
+						router-link.btn.btn-primary.center-block.vert-center.view-arn(
 							tag="button"
 							v-bind:to='answersLink'
 							v-if='findOut == false'
@@ -114,11 +113,11 @@
 				question1: false,
 				question2: false,
 				question3: false,
-				// question: 0,
-				question: 9,
+				question: 0,
+				// question: 9,
 				arnQuest: 'app-quest-one',
-				// answers: [],
-				answers: ['C','C','C','C','C','C','C','C','C'],
+				answers: [],
+				// answers: ['C','C','C','C','C','C','C','C','C'],
 				bgColor: false,
 				transChg: 'drop-in',
 				yourArnie: null,
@@ -466,32 +465,6 @@
 		margin-top: 3%;
 	}
 
-	.changeq-enter {
-		/*transform: translateY(-600px);
-		opacity: 0;*/
-	}
-
-	.changeq-enter-active {
-		/*transition: transform 5s ease-in;*/
-	}
-
-	.changeq-enter-to {
-		/*transform: translateY(0px);*/
-	}
-
-	.changeq-leave {
-		/*transform: translateY(0px);	*/
-	}
-
-	.changeq-leave-active {
-		/*transition: transform 5s ease-in;*/
-	}
-
-	.changeq-leave-to {
-		/*transform: translateY(-600px);
-		opacity: 0;*/
-	}
-
 	.question {
 		color: white;
 		font-size: 3em;
@@ -499,6 +472,19 @@
 
 	.quest-text {
 		font-size: 0.8em;
+	}
+
+	.arn-btn {
+		font-size: 1.2em;
+		font-weight: bold;
+		font-family: 'VT323', monospace;
+		text-transform: uppercase;
+	}
+
+	.cal-ans, .view-arn {
+		font-family: 'Special Elite', cursive;
+		font-size: 1.2em;
+		font-weight: lighter;
 	}
 
 	.answer-outer {

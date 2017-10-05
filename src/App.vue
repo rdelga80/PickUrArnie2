@@ -1,5 +1,5 @@
 <template lang="pug">
-  div.container(v-bind:style='{ "background-color": isBlack, width: contWid }')
+  div.container(v-bind:style='{ "background-color": isBlack, width: contWid }' style='background-color: rgba(0,0,0,0)')
     div.row
       div#app.col-xs-12
         transition(name='exit')
@@ -26,18 +26,11 @@ export default {
   },
   methods: {
     backgroundChg(color) {
+      console.log(color)
       var vm = this
       var time = 0
       this.contWid = '100%'
-      var backMut = setInterval(function() {
-        if(time <= 1) {
-          time += 0.1
-          vm.isBlack = 'rgba(0,0,0,' + time + ')'
-          console.log(vm.isBlack)
-        } else {
-          clearInterval(backMut)
-        }
-      },500)
+      vm.isBlack = 'transparent'
     }
   },
   components: {
@@ -46,8 +39,8 @@ export default {
     chooseAll : chooseAll
   },
   created() {
+    this.isBlack = 'rgba(0,0,0,0)'
     eventBus.$on('changeBack', (backgroundCg) => {
-      console.log(backgroundCg)
       this.backgroundChg(backgroundCg)
     })
   }

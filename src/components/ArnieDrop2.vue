@@ -41,7 +41,7 @@
           tag="div"
           class="col-xs-9 picktext"
           style='cursor: pointer'
-          v-bind:to='questionsLink'
+          to='/questions'
           v-bind:class='{ pickact: isActive }'
           @mouseover='[isActive = true, arrowShow = true]'
           @click='chooseArnie'
@@ -158,17 +158,6 @@ export default {
   }
 }
 
-// var sound = new Audio('src/assets/start.mp3')
-
-// function playSound() {
-//   sound.play()
-// }
-
-// function pauseSound() {
-//   sound.pause()
-//   sound.currentTime = 0
-// }
-
 </script>
 
 <style scoped>
@@ -186,6 +175,10 @@ export default {
     position: relative;
     width: 380px;
     padding-top: 10%;
+  }
+
+  #arnie-row {
+    background-color: rgba(0,0,0,0);
   }
 
   #whos { 

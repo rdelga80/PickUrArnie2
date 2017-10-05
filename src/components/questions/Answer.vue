@@ -58,7 +58,8 @@
 			div.col-xs-12.text-center
 				router-link(
 					tag='button'
-					class='btn btn-primary'
+					class='btn btn-primary arnbackbtn'
+					@click='changeBgBack'
 					v-bind:to="{ name: 'Home' }"
 				)
 					| Back to Arnie
@@ -157,6 +158,9 @@
 			},
 			submit() {
 				this.resource.saveAlt(this.arnInit)
+			},
+			changeBgBack() {
+				eventBus.changeBg('transparent')
 			}
 		},
 		components: {
@@ -254,8 +258,16 @@
 		color: #FFF;
 	}
 
+	.arnbackbtn {
+		font-family: 'Special Elite', cursive;
+		font-size: 1.2em;
+	}
+
 	.arnbttmthx {
+		font-family: 'VT323', monospace;
+		font-size: 3em;
 		color: #FFF;
+		margin-bottom: 10px;
 	}
 
 </style>
