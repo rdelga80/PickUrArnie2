@@ -41,7 +41,7 @@
           tag="div"
           class="col-xs-9 picktext"
           style='cursor: pointer'
-          to='/questions'
+          v-bind:to='{ name: "Questions" }'
           v-bind:class='{ pickact: isActive }'
           @mouseover='[isActive = true, arrowShow = true]'
           @click='chooseArnie'
