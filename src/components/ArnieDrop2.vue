@@ -142,7 +142,7 @@ export default {
   },
   beforeMount() {
     this.dropArnie()
-    this.playSound('/start.mp3')
+    this.playSound('/PickUrArnie2/start.mp3')
   },
   beforeRouteEnter(to, from, next) {
     if (true) {
