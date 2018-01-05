@@ -74,7 +74,7 @@
 
 <script>
 
-import arnDropSound from '/src/assets/start.mp3'
+import arnDropSound from '/PickUrArnie2/src/assets/start.mp3'
 
 export default {
 	data: function() {
