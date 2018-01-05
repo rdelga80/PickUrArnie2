@@ -359,6 +359,9 @@
 				const smVal = Object.values(smAns)
 				this.answersLink.params.answer = smVal[0]
 			}
+		},
+		created() {
+			console.log('Questions')
 		}
 	}
 	

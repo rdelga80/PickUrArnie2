@@ -41,7 +41,7 @@
           tag="div"
           class="col-xs-9 picktext"
           style='cursor: pointer'
-          v-bind:to='{ name: "Questions" }'
+          v-bind:to='questionsLink'
           v-bind:class='{ pickact: isActive }'
           @mouseover='[isActive = true, arrowShow = true]'
           @click='chooseArnie'
@@ -74,8 +74,6 @@
 
 <script>
 
-import arnDropSound from '/PickUrArnie2/src/assets/start.mp3'
-
 export default {
 	data: function() {
     return {
@@ -93,8 +91,7 @@ export default {
       },
       aarnLink: {
         name: 'AllArnie'
-      },
-      sound: new Audio(arnDropSound)
+      }
     }
   },
 	methods: {
@@ -139,17 +136,13 @@ export default {
     	this.$emit('startChoice', 'chooseAll')
     },
     playSound(a) {
-      if (a == 'on') {
-        var audio = this.sound
-        audio.play()
-      } else {
-        audio.pause()
-      }
+      var audio = new Audio(a)
+      audio.play()
     }
   },
   beforeMount() {
     this.dropArnie()
-    this.playSound('on')
+    this.playSound('/start.mp3')
   },
   beforeRouteEnter(to, from, next) {
     if (true) {
