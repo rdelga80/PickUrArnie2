@@ -74,6 +74,8 @@
 
 <script>
 
+import arnDropSound from '/src/assets/start.mp3'
+
 export default {
 	data: function() {
     return {
@@ -92,7 +94,7 @@ export default {
       aarnLink: {
         name: 'AllArnie'
       },
-      sound: new Audio('/src/assets/start.mp3')
+      sound: new Audio(arnDropSound)
     }
   },
 	methods: {
