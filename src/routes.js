@@ -19,7 +19,7 @@ const AllArnie = resolve => {
 }
 
 export const routes = [
-	{ path: '/PickUrArnie2', name: 'Home', component: ArnieDrop },
+	{ path: '/PickUrArnie2/', name: 'Home', component: ArnieDrop },
 	{ path: '/PickUrArnie2/all_arnie', name: 'AllArnie', component: AllArnie },
 	{ path: '/PickUrArnie2/questions', props: true, name: 'Questions', component: Questions },
 	{ path: '/PickUrArnie2/your_arnie', props: true, name: 'Answer', component: Answer },
